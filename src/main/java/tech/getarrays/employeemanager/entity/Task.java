@@ -1,11 +1,12 @@
-package tech.getarrays.employeemanager.model;
+package tech.getarrays.employeemanager.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
-public class Task {
+public class Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

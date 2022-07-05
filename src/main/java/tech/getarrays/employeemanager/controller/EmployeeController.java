@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import tech.getarrays.employeemanager.model.Employee;
+import tech.getarrays.employeemanager.entity.Employee;
 import tech.getarrays.employeemanager.service.EmployeeService;
 
 import java.util.List;
@@ -23,12 +23,21 @@ public class EmployeeController {
     }
 
     @GetMapping("/all")
-    public String getAllEmployees(Model model, @RequestParam(defaultValue = "") String name) {
+    public String getAllEmployeesForAdmin(Model model, @RequestParam(defaultValue = "") String name) {
         List<Employee> employees = employeeService.findAllEmployees().
                 stream().
                 filter(employee -> employee.getName().contains(name)).collect(Collectors.toList());
         model.addAttribute("employees", employees);
         return "views/list";
+    }
+
+    @GetMapping("/employees")
+    public String getEmployees(Model model, @RequestParam(defaultValue = "") String name) {
+        List<Employee> employees = employeeService.findAllEmployees().
+                stream().
+                filter(employee -> employee.getName().contains(name)).collect(Collectors.toList());
+        model.addAttribute("employees", employees);
+        return "views/allUsers";
     }
 
     @GetMapping("/find/{id}")
@@ -44,9 +53,9 @@ public class EmployeeController {
         return new ResponseEntity<>(updateEmployee, HttpStatus.OK);
     }
 
-    @PutMapping("/delete/{id}")
-    public ResponseEntity<Employee> deleteEmployee(@PathVariable("id") Long id) {
-        employeeService.deleteEmployee(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("/{email}/delete")
+    public String deleteEmployee(@PathVariable(value = "email") String email) {
+        employeeService.deleteEmployee(email);
+        return "redirect:/all";
     }
 }

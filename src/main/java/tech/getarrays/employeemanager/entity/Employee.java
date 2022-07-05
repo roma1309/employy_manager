@@ -1,4 +1,4 @@
-package tech.getarrays.employeemanager.model;
+package tech.getarrays.employeemanager.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

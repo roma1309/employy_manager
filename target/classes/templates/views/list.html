@@ -25,6 +25,7 @@
                     <th>Phone</th>
                     <th>job Tittle</th>
                     <th>employee Code</th>
+                    <th>Enabled</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,7 +36,9 @@
                     <td th:text="${employee.jobTittle}"></td>
                     <td th:text="${employee.employeeCode}">
                     <td><a th:href="@{/addTask(email=${employee.email})}" class="btn btn-info">Add task</a></td>
-                    <td><a href="" class="btn btn-danger">Dismiss</a></td>
+                    <td>
+                        <a class="btn btn-danger"  th:href="@{${employee.email} + '/delete'}">Dismiss</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

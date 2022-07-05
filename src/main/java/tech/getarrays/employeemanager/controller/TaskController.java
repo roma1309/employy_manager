@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import tech.getarrays.employeemanager.model.Task;
+import tech.getarrays.employeemanager.entity.Task;
 import tech.getarrays.employeemanager.service.EmployeeService;
 import tech.getarrays.employeemanager.service.TaskService;
 

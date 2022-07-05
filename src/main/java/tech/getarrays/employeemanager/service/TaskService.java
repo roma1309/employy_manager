@@ -2,15 +2,13 @@ package tech.getarrays.employeemanager.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.getarrays.employeemanager.model.Employee;
-import tech.getarrays.employeemanager.model.Task;
+import tech.getarrays.employeemanager.entity.Employee;
+import tech.getarrays.employeemanager.entity.Task;
 import tech.getarrays.employeemanager.repo.TaskRepo;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class TaskService {
 
     private TaskRepo taskRepo;

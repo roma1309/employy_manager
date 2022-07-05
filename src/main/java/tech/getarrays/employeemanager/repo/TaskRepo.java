@@ -1,8 +1,8 @@
 package tech.getarrays.employeemanager.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import tech.getarrays.employeemanager.model.Employee;
-import tech.getarrays.employeemanager.model.Task;
+import tech.getarrays.employeemanager.entity.Employee;
+import tech.getarrays.employeemanager.entity.Task;
 
 import java.util.List;
 

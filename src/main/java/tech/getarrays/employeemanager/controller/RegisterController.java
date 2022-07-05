@@ -6,9 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import tech.getarrays.employeemanager.model.Employee;
+import tech.getarrays.employeemanager.entity.Employee;
 import tech.getarrays.employeemanager.service.EmployeeService;
-
 import javax.validation.Valid;
 
 @Controller
@@ -24,7 +23,8 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String registerEmployee(@Valid Employee employee, BindingResult bindingResult, Model model) {
+    public String registerEmployee(@Valid Employee employee, BindingResult bindingResult,
+                                   Model model) {
         if (bindingResult.hasErrors()) {
             return "views/register";
         }
@@ -33,6 +33,7 @@ public class RegisterController {
             return "views/register";
         }
         employeeService.addUser(employee);
+        //employeeService.sendVerificationEmail(employee, siteUrl);
         return "views/success";
     }
 }

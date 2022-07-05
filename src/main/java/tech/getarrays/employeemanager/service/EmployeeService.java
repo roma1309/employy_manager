@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import tech.getarrays.employeemanager.exeption.UserNotFoundExceptional;
-import tech.getarrays.employeemanager.model.Employee;
-import tech.getarrays.employeemanager.model.Role;
+import tech.getarrays.employeemanager.entity.Employee;
+import tech.getarrays.employeemanager.entity.Role;
 import tech.getarrays.employeemanager.repo.EmployeeRepo;
 
 import javax.transaction.Transactional;
@@ -16,6 +16,7 @@ import java.util.UUID;
 @Service
 @Transactional
 public class EmployeeService {
+
     private EmployeeRepo employeeRepo;
 
     @Autowired
@@ -43,6 +44,7 @@ public class EmployeeService {
         employee.setRoles(roles);
         employee.setEmployeeCode(UUID.randomUUID().toString());
         return employeeRepo.save(employee);
+
     }
 
     public Employee findByEmail(String email) {
@@ -53,8 +55,8 @@ public class EmployeeService {
         return employeeRepo.save(employee);
     }
 
-    public void deleteEmployee(Long id) {
-        employeeRepo.deleteEmployeeById(id);
+    public void deleteEmployee(String email) {
+        employeeRepo.removeByEmail(email);
     }
 
 
