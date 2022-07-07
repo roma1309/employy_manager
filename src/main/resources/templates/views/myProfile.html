@@ -14,10 +14,11 @@
 <div class="container">
     <div class="container bootstrap snippets bootdey">
         <div class="panel-body inf-content">
-            <div class="row">
+            <div class="row" th:each="el:${employee}">
                 <div class="col-md-4">
-                    <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip"
-                         src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
+                    <img alt="" title="" class="img-circle img-thumbnail isTooltip"
+                         th:src="*{'data:image/jpeg;base64,'+{el.image}}" style="width: 600px;height: 350px;"
+                         data-original-title="Usuario">
                     <ul title="Ratings" class="list-inline ratings text-center">
                         <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
@@ -28,7 +29,7 @@
                 </div>
                 <div class="col-md-6">
                     <strong>Information</strong><br>
-                    <div class="table-responsive" th:each="el:${employee}">
+                    <div class="table-responsive">
                         <table class="table table-user-information">
                             <tbody>
                             <tr>
@@ -71,6 +72,16 @@
                                 <td class="text-primary" th:text="${el.phone}">
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                        Job tittle
+                                    </strong>
+                                </td>
+                                <td class="text-primary" th:text="${el.jobTittle}">
+                                </td>
+                            </tr>
                             </tr>
                             </tbody>
                         </table>
@@ -79,23 +90,24 @@
             </div>
         </div>
     </div>
+    <div class="alert alert-danger" th:if="${error}">
+        <p class="text text-center" th:text="${error}">
+    </div>
     <div class="table-responsive">
         <table class="table table-hover mb-0">
             <thead>
             <tr>
-                <th>Date start #</th>
-                <th>Start time</th>
-<!--                <th>Date stop</th>-->
-                <th>Time stop</th>
+                <th>start Date</th>
+                <th>Stop Date</th>
                 <th>Description</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="task:${tasks}">
-                <td th:text="${task.date}"></td>
-                <td th:text="${task.startTime}"></td>
-                <td th:text="${task.stopTime}"></td>
+                <td th:text="${task.startDate}"></td>
+                <td th:text="${task.stopDate}"></td>
                 <td th:text="${task.description}"></td>
+                <td><a th:href="@{${task.id} + '/completed'}" class="btn btn-success">Completed</a></td>
             </tr>
             </tbody>
         </table>

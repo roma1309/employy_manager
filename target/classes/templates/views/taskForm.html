@@ -7,29 +7,26 @@
 </head>
 <header th:insert="fragments/header :: header"></header>
 <body>
-<form th:action="@{/addTask}" th:object="${task}" method="post">
-    <div class="form-group">
-        <label for="Date" class="form-control-label">Date</label> <input
-            type="date" class="form-control" th:field="*{date}" id="date"/>
-        <div class="text text-danger" th:if="${#fields.hasErrors('date')}"
-             th:errors="*{date}"></div>
+<form th:action="@{/addTask}" th:object="${task}" method="post" class="container mt-5">
+    <div class="alert alert-info" th:if="${exist}">
+        <p class="text text-center">
+            Task dates can't be earlier than now!!!
+        </p>
     </div>
-    <div class="form-group">
-        <label for="startTime" class="form-control-label">StartTime</label>
-        <input type="time" class="form-control" th:field="*{startTime}"
-               id="startTime"/>
+    <div>
+        <label for="startDate" class="form-control-label">Start Date</label> <input
+            type="datetime-local" class="form-control" th:field="*{startDate}" id="startDate"/>
+        <div class="text text-danger" th:if="${#fields.hasErrors('startDate')}"
+             th:errors="*{startDate}"></div>
+    </div>
+    <div>
+        <label for="stopDate" class="form-control-label">Stop Date</label> <input
+            type="datetime-local" class="form-control" th:field="*{stopDate}"
+            id="stopDate"/>
         <div class="text text-danger"
-             th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></div>
-
+             th:if="${#fields.hasErrors('stopDate')}" th:errors="*{stopDate}"></div>
     </div>
-    <div class="form-group">
-        <label for="stopTime" class="form-control-label">Stop Time</label> <input
-            type="time" class="form-control" th:field="*{stopTime}"
-            id="stopTime"/>
-        <div class="text text-danger"
-             th:if="${#fields.hasErrors('stopTime')}" th:errors="*{stopTime}"></div>
-    </div>
-    <div class="form-group">
+    <div>
         <label for="description" class="form-control-label">Description</label>
         <textarea class="form-control" th:field="*{description}"
                   id="description">  </textarea>

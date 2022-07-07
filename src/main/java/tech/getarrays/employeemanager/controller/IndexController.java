@@ -1,10 +1,9 @@
 package tech.getarrays.employeemanager.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import tech.getarrays.employeemanager.service.EmployeeService;
-import tech.getarrays.employeemanager.service.TaskService;
+import tech.getarrays.employeemanager.entity.Employee;
 
 
 @Controller
@@ -18,6 +17,13 @@ public class IndexController {
     @GetMapping("/login")
     public String shouLoginForm() {
         return "views/login";
+    }
+
+    @GetMapping("/update")
+    public String editForm(Model model) {
+
+        model.addAttribute("employee", new Employee());
+        return "views/editProfile";
     }
 
 }

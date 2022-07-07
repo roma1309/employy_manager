@@ -5,10 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import tech.getarrays.employeemanager.entity.Employee;
 import tech.getarrays.employeemanager.service.EmployeeService;
 
+import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +35,7 @@ public class EmployeeController {
         return "views/list";
     }
 
+
     @GetMapping("/employees")
     public String getEmployees(Model model, @RequestParam(defaultValue = "") String name) {
         List<Employee> employees = employeeService.findAllEmployees().
@@ -40,17 +45,16 @@ public class EmployeeController {
         return "views/allUsers";
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
-        Employee employee = employeeService.findEmployeeById(id);
-        return new ResponseEntity<>(employee, HttpStatus.OK);
-    }
+    @PostMapping("/update")
+    public String updateEmployee(@RequestParam("name") String name,
+                                 @RequestParam("jobTittle") String jobTittle,
+                                 @RequestParam("phone") String phone,
+                                 @RequestParam("image") MultipartFile file, Principal principal,
+                                 Model model) {
+        Employee employee = employeeService.findByEmail(principal.getName());
+        employeeService.updateEmployee(employee, name, jobTittle, phone, file);
+        return "redirect:/myProfile";
 
-
-    @PutMapping("/update")
-    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
-        Employee updateEmployee = employeeService.updateEmployee(employee);
-        return new ResponseEntity<>(updateEmployee, HttpStatus.OK);
     }
 
     @GetMapping("/{email}/delete")

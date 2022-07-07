@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 public class Task implements Serializable {
@@ -11,11 +12,9 @@ public class Task implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotEmpty
-    private String date;
+    private String startDate;
     @NotEmpty
-    private String startTime;
-    @NotEmpty
-    private String stopTime;
+    private String stopDate;
     @NotEmpty
     @Size(min = 6)
     private String description;
@@ -26,11 +25,11 @@ public class Task implements Serializable {
     public Task() {
     }
 
-    public Task(String date, String startTime, String stopTime, String description) {
-        this.date = date;
-        this.startTime = startTime;
-        this.stopTime = stopTime;
+    public Task(@NotEmpty String startDate, @NotEmpty String stopDate, @NotEmpty @Size(min = 6) String description, Employee employee) {
+        this.startDate = startDate;
+        this.stopDate = stopDate;
         this.description = description;
+        this.employee = employee;
     }
 
     public Long getId() {
@@ -41,28 +40,20 @@ public class Task implements Serializable {
         this.id = id;
     }
 
-    public String getDate() {
-        return date;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getStopDate() {
+        return stopDate;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getStopTime() {
-        return stopTime;
-    }
-
-    public void setStopTime(String stopTime) {
-        this.stopTime = stopTime;
+    public void setStopDate(String stopDate) {
+        this.stopDate = stopDate;
     }
 
     public String getDescription() {
@@ -85,9 +76,8 @@ public class Task implements Serializable {
     public String toString() {
         return "Task{" +
                 "id=" + id +
-                ", date='" + date + '\'' +
-                ", startTime='" + startTime + '\'' +
-                ", stopTime='" + stopTime + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", stopDate='" + stopDate + '\'' +
                 ", description='" + description + '\'' +
                 ", employee=" + employee +
                 '}';

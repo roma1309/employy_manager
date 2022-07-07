@@ -6,7 +6,9 @@ import tech.getarrays.employeemanager.entity.Task;
 
 import java.util.List;
 
+
 public interface TaskRepo extends JpaRepository<Task, Long> {
     List<Task> findByEmployee(Employee employee);
 
+    int removeById(Long id);
 }

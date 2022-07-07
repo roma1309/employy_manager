@@ -5,14 +5,17 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    @Lob
+    String image;
     private String name;
     @Email
     @Column(unique = true)
@@ -26,11 +29,12 @@ public class Employee implements Serializable {
     private String employeeCode;
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<Task> tasks;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "employee_roles", joinColumns = {
-            @JoinColumn(name = "employee_email", referencedColumnName = "email")
-    }, inverseJoinColumns = {@JoinColumn(name = "role_name", referencedColumnName = "name")})
-    private List<Role> roles;
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "employee_roles", joinColumns = {
+            @JoinColumn(name = "employee_email", referencedColumnName = "email")})
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles = new HashSet<>();
 
     public Employee() {
     }
@@ -41,6 +45,14 @@ public class Employee implements Serializable {
         this.phone = phone;
         this.password = password;
         this.jobTittle = jobTittle;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getPassword() {
@@ -59,11 +71,11 @@ public class Employee implements Serializable {
         this.tasks = tasks;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 

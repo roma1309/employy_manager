@@ -9,9 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import tech.getarrays.employeemanager.entity.Task;
 import tech.getarrays.employeemanager.service.EmployeeService;
 import tech.getarrays.employeemanager.service.TaskService;
+import tech.getarrays.employeemanager.utils.DateUtils;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class TaskController {
@@ -28,10 +33,19 @@ public class TaskController {
     }
 
     @PostMapping("/addTask")
-    public String addTask(@Valid Task task, BindingResult bindingResult, HttpSession session) {
+    public String addTask(@Valid Task task, BindingResult bindingResult, HttpSession session, Model model) {
         if (bindingResult.hasErrors()) {
             return "views/taskForm";
         }
+
+        Date startDate = DateUtils.getDate(task.getStartDate());
+        Date stopDate = DateUtils.getDate(task.getStopDate());
+
+        if (startDate.before(new Date()) || stopDate.before(startDate)) {
+            model.addAttribute("exist", true);
+            return "views/taskForm";
+        }
+
         String email = (String) session.getAttribute("email");
         taskService.addTask(task, employeeService.findByEmail(email));
 
