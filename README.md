@@ -30,5 +30,17 @@ spring.datasource.password=password
 ```
 ### Program Images
 
-
-![Registration](src/main/resources/static/image/Screenshot_1.png)
+>__Registration__
+![](src/main/resources/static/image/Screenshot_1.png)
+>__Login__
+![](src/main/resources/static/image/Screenshot_15.png)
+>__List users for Admin__
+![](src/main/resources/static/image/Screenshot_18.png)
+>__Employees__
+![](src/main/resources/static/image/Screenshot_21.png)
+>__Edit profile__
+![](src/main/resources/static/image/Screenshot_17.png)
+>__My profile__
+![](src/main/resources/static/image/Screenshot_20.png)
+>__Add the task__
+![](src/main/resources/static/image/Screenshot_19.png)
