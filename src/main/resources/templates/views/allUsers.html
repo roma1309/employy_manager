@@ -12,12 +12,14 @@
 <div class="content">
     <div class="container">
         <div class="row">
-            <div class="col-sm-4">
-                <input type="text" name="name" class="form-control"
-                       placeholder="Search employee"/>
-                <br>
-                <input type="submit" value="Search" class="btn btn-primary"/>
-            </div>
+            <form action="/employees" class="form-inline">
+                <div class="col-sm-4">
+                    <input type="text" name="name" class="form-control"
+                           placeholder="Search employee"/>
+                    <br>
+                    <input type="submit" value="Search" class="btn btn-primary"/>
+                </div>
+            </form>
             <!-- end col -->
         </div>
         <!-- end row -->
@@ -31,7 +33,8 @@
                                 class="rounded-circle img-thumbnail" alt="profile-image"></div>
                         <div class="">
                             <h4 th:text="${employee.name}"></h4>
-                            <p class="text-muted" th:text="${employee.jobTittle}"></p>
+                            <h5 th:text="${employee.jobTittle}"></h5>
+                            <p class="text-muted" th:text="${employee.phone}"></p>
                         </div>
                         <ul class="social-links list-inline">
                             <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip"
@@ -44,31 +47,6 @@
                                                             class="tooltips" href="" data-original-title="Skype"><i
                                     class="fa fa-skype"></i></a></li>
                         </ul>
-                        <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">
-                            Message Now
-                        </button>
-                        <div class="mt-4">
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="mt-3">
-                                        <h4>2563</h4>
-                                        <p class="mb-0 text-muted">Wallets Balance</p>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="mt-3">
-                                        <h4>6952</h4>
-                                        <p class="mb-0 text-muted">Income amounts</p>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="mt-3">
-                                        <h4>1125</h4>
-                                        <p class="mb-0 text-muted">Total Transactions</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -78,4 +56,5 @@
     <!-- container -->
 </div>
 </body>
+<footer th:insert="fragments/footer :: footer"></footer>
 </html>

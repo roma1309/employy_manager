@@ -63,7 +63,7 @@ public class EmployeeService {
             System.out.println("not a a valid file");
         }
         try {
-            if (!fileName.equals(" ")) {
+            if (!fileName.equals("")) {
                 employee.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
             }
         } catch (IOException e) {
